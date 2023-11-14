@@ -2,8 +2,8 @@ name: Watchtower
 services:
     watchtower:
         container_name: watchtower
+        command: --cleanup --include-restarting --rolling-restart --include-stopped --interval 21600
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - /etc/localtime:/etc/localtime:ro
         image: containrrr/watchtower
-        command: --cleanup --include-restarting --rolling-restart --include-stopped --interval 21600
