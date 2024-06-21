@@ -2,8 +2,17 @@
 services:
   app:
     container_name: watchtower
-    command: --cleanup --include-restarting --rolling-restart --include-stopped --interval 21600
+    environment:
+      - TZ=Europe/Berlin
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=3600
+      - WATCHTOWER_ROLLING_RESTART=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_NO_STARTUP_MESSAGE=true
     volumes:
        - /var/run/docker.sock:/var/run/docker.sock
        - /etc/localtime:/etc/localtime:ro
     image: containrrr/watchtower
+    security_opt:
+       - no-new-privileges:true
+    
